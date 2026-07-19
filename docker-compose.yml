@@ -1,0 +1,59 @@
+networks:
+  first_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          gateway: 192.168.1.1
+  
+  net_b:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.2.0/24
+          gateway: 192.168.2.1
+
+services:
+  host1:
+    image: my-alpine-ssh-frr:latest
+    container_name: host1_lab
+    networks:
+      first_network:
+        ipv4_address: 192.168.1.10
+    
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    ports:
+      - "2201:22"
+  
+  host2:
+    image: my-alpine-ssh-frr:latest
+    container_name: host2_lab
+    networks:
+      first_network:
+        ipv4_address: 192.168.1.20
+    
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+
+    ports:
+      - "2202:22"
+
+  router:
+    image: my-alpine-ssh-frr:latest
+    container_name: router
+    networks:
+      first_network:
+        ipv4_address: 192.168.1.254
+      net_b:
+        ipv4_address: 192.168.2.254
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    ports:
+      - "2200:22"
+        
+
