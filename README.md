@@ -1,15 +1,28 @@
+# Net_lab
 
-## Networking of DOCKERIZED Containers
+<p>
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
+<img src="https://img.shields.io/badge/YAML-CB171E?style=for-the-badge&logo=yaml&logoColor=white"/>
+<img src="https://img.shields.io/badge/Networking-4285F4?style=for-the-badge"/>
+</p>
 
-Each computer here stands in the network connecting to the router
-we also containerized but also used different container but harness around it
-so here is how things works the main files here are all
+## About
 
-but here for now it is ROUTER there at which uses networking protocols we normally knows of
-RIP, OSPRF and many more through this image here which has been done which is good for here
+A hands-on lab exploring how Docker containers communicate with each other over a **private network** — the same way physical machines do on a LAN.
 
-then we have set there in our [docker-compose.yml] there, different players of one is:
-Host-1 which is on [192.168.1.10]
-Host-2 which is on [192.168.1.20]
+## Why it exists
 
-Then there the router became able to route between different network by the help of that router which is became capable of routing between two different networks one of 192.168.2.0 and 192.168.1.0 like that using protocols of of networking where data from one container could go to another without hurdles  
+Curiosity, mostly. Containers *feel* isolated, but they're not actually cut off from each other — Docker gives each one a virtual network interface, and containers on the same custom network can reach each other by name, resolve DNS, and route traffic just like real machines plugged into the same switch.
+
+This project was built purely for learning: to actually see that behavior happen, not just read about it. Using `Dockerfile`s and Docker Compose (`.yml`), it sets up multiple containers on a shared private network and tests how they discover and talk to one another — service-to-service communication, container DNS resolution, and network isolation boundaries.
+
+## What it covers
+
+- Creating custom Docker networks (bridge networks)
+- Multiple containers joining the same private network
+- Container-to-container communication by service name
+- Verifying isolation from containers *outside* the network
+
+## Status
+
+Learning project — expanding as I explore more networking scenarios (multi-network setups, exposing selective ports, etc.).
